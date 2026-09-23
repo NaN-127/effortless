@@ -1,8 +1,63 @@
 # Effortless — Agent Rules
 
-This document defines the mandatory rules that any AI agent working on the Effortless codebase must follow.
+This document defines the mandatory rules that any AI agent or engineer working on the Effortless codebase must follow.
 
 These rules are non-negotiable. Violation of any rule must be flagged and corrected before merging.
+
+---
+
+## Effortless Engineering Rules
+
+### Git
+- Never work directly on `main`.
+- One branch per logical feature/fix (`feature/*`, `fix/*`, `chore/*`).
+- Keep branches short-lived.
+- Delete branches after merge.
+- Use meaningful, conventional commit messages (`feat:`, `fix:`, `docs:`, `test:`, `chore:`).
+
+### Pull Requests
+- Every change goes through a PR.
+- CI must pass before merge.
+- Review the diff before merging.
+- Keep PRs focused and small.
+- Document breaking/API changes.
+
+### Main
+- `main` must always remain stable.
+- No direct pushes.
+- Require PR + CI checks.
+
+### Testing
+- Add tests for new behavior.
+- Never bypass failing tests just to merge.
+- Do not make real external AI-provider calls in CI.
+
+### Security
+- Never commit secrets.
+- Never log API keys, tokens, raw audio, or sensitive transcripts.
+- Provider API keys stay strictly on the backend.
+
+### Architecture
+- Respect existing architecture and layer boundaries.
+- Domain must remain platform/framework independent.
+- External providers stay behind abstractions.
+- Avoid premature infrastructure/architecture complexity.
+
+### API
+- Backend and client API contracts must stay synchronized.
+- API changes require corresponding client/test/documentation updates.
+
+### Dependencies
+- Add dependencies only when justified.
+- Prefer existing project capabilities.
+- Upgrade dependencies deliberately.
+
+### Documentation
+- Update documentation when architecture or developer workflow changes.
+
+### Release
+- Only release tested code from `main`.
+- Use version tags for releases (`v*`).
 
 ---
 
