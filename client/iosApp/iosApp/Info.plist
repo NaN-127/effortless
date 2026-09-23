@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<!--
+	  iOS REQUIRES this key before it will let the app open the camera.
+	  The string is shown in the permission prompt. Without it, the app crashes
+	  the moment you present the camera picker.
+	-->
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access so you can capture photos to add to your gallery.</string>
+	<!--
+	  Needed for the photo-library fallback used on the Simulator (which has no camera).
+	  iOS also requires this key before showing the photo library, or the app crashes.
+	-->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photo library access to pick photos when a camera is unavailable.</string>
+</dict>
+</plist>

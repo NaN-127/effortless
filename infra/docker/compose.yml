@@ -1,0 +1,80 @@
+name: effortless
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: effortless-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-effortless}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-postgres} -d $${POSTGRES_DB:-effortless}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - effortless-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: effortless-redis
+    command: redis-server --appendonly yes
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    networks:
+      - effortless-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    container_name: effortless-backend
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      APP_DEBUG: ${APP_DEBUG:-true}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-effortless}
+      REDIS_URL: redis://redis:6379/0
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      SARVAM_API_KEY: ${SARVAM_API_KEY:-}
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - effortless-network
+    restart: unless-stopped
+
+networks:
+  effortless-network:
+    driver: bridge
+    name: effortless-network
+
+volumes:
+  postgres_data:
+    name: effortless_postgres_data
+  redis_data:
+    name: effortless_redis_data
