@@ -34,3 +34,12 @@ format-backend: ## Format backend code with Ruff
 
 test-client: ## Run client multiplatform tests
 	cd client && ./gradlew :shared:allTests
+
+artemis-setup: ## Set up Google ARTEMIS environment and install MCP integration
+	cd tools/artemis && uv sync && uv run artemis mcp --install antigravity
+
+artemis-web: ## Start Google ARTEMIS Web Dashboard
+	cd tools/artemis && ./start.sh
+
+artemis-doctor: ## Check ARTEMIS and Android environment readiness
+	cd tools/artemis && uv run artemis doctor
