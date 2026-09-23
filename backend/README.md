@@ -1,6 +1,6 @@
-# Typeless Backend
+# Effortless Backend
 
-FastAPI backend service powering the Typeless AI voice translation keyboard.
+FastAPI backend service powering the Effortless AI voice translation keyboard.
 
 ## Architecture
 
@@ -71,6 +71,6 @@ API documentation (available in debug mode):
 ## Docker Build & Run
 
 ```bash
-docker build -t typeless-backend .
-docker run -p 8000:8000 --env-file .env typeless-backend
+docker build -t effortless-backend .
+docker run -p 8000:8000 --env-file .env effortless-backend
 ```

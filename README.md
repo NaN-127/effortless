@@ -1,8 +1,8 @@
-# Typeless
+# Effortless
 
 > Speak in one language. Type in another.
 
-Typeless is a cross-platform AI-powered keyboard/input application that converts spoken input into translated text, ready for insertion into any active text field.
+Effortless is a cross-platform AI-powered keyboard/input application that converts spoken input into translated text, ready for insertion into any active text field.
 
 ## How It Works
 

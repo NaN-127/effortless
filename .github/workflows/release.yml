@@ -28,8 +28,8 @@ jobs:
           file: backend/Dockerfile
           push: false # Set to true once DOCKER_REGISTRY_TOKEN secret is configured
           tags: |
-            typeless-backend:${{ github.ref_name }}
-            typeless-backend:latest
+            effortless-backend:${{ github.ref_name }}
+            effortless-backend:latest
 
   client-android-release:
     name: Release / Client Android APK

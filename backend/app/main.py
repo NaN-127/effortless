@@ -1,4 +1,4 @@
-"""Typeless API — FastAPI application factory.
+"""Effortless API — FastAPI application factory.
 
 This module creates and configures the FastAPI application instance.
 All route registration, middleware setup, and error handler configuration
@@ -45,7 +45,7 @@ def create_app() -> FastAPI:
 
     app = FastAPI(
         title=settings.app_name,
-        description="AI-powered voice translation backend for the Typeless keyboard",
+        description="AI-powered voice translation backend for the Effortless keyboard",
         version="0.1.0",
         lifespan=lifespan,
         docs_url="/docs" if settings.app_debug else None,

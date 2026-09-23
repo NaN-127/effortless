@@ -1,6 +1,6 @@
-# Typeless — Agent Rules
+# Effortless — Agent Rules
 
-This document defines the mandatory rules that any AI agent working on the Typeless codebase must follow.
+This document defines the mandatory rules that any AI agent working on the Effortless codebase must follow.
 
 These rules are non-negotiable. Violation of any rule must be flagged and corrected before merging.
 
